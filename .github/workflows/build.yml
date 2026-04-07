@@ -1,0 +1,41 @@
+name: Build Unsigned iOS App
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install XcodeGen
+        run: brew install xcodegen
+        
+      - name: Generate Xcode Project
+        run: xcodegen generate
+        
+      - name: Build Unsigned App
+        run: |
+          xcodebuild clean build \
+            -project WarehouseApp.xcodeproj \
+            -scheme WarehouseApp \
+            -configuration Release \
+            -sdk iphoneos \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            CONFIGURATION_BUILD_DIR=${{ github.workspace }}/build
+            
+      - name: Package to IPA
+        run: |
+          mkdir -p Payload
+          mv build/WarehouseApp.app Payload/
+          zip -qr WarehouseApp.ipa Payload
+          
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: WarehouseApp-IPA
+          path: WarehouseApp.ipa

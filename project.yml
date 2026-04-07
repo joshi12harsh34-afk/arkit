@@ -1,0 +1,22 @@
+name: WarehouseApp
+options:
+  bundleIdPrefix: com.warehouse
+targets:
+  WarehouseApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - App
+      - Components
+      - Models
+      - Services
+      - Utilities
+      - ViewModels
+      - Views
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_NSCameraUsageDescription: "We need camera access for AR measurement and Barcode scanning."
+        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "We need access to capture and view package images."
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
