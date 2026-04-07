@@ -61,7 +61,7 @@ struct CameraView: View {
         .onDisappear {
             cameraService.stopSession()
         }
-        .onChange(of: cameraService.capturedImageBase64) { _, newImage in
+        .onChange(of: cameraService.capturedImageBase64) { newImage in
             if let img = newImage {
                 viewModel.addBase64Image(img)
                 dismiss() // Return to home nicely after 1 photo

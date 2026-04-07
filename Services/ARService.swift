@@ -75,11 +75,11 @@ class ARService: NSObject, ObservableObject, ARSessionDelegate {
         lineEntity = ModelEntity(mesh: cylinder, materials: [material])
         
         if let lineEntity = lineEntity {
-            let midpoint = simd_mix(start, end, 0.5)
+            let midpoint = simd_mix(start, end, SIMD3<Float>(repeating: 0.5))
             let anchor = AnchorEntity(world: midpoint)
             
             let vector = end - start
-            lineEntity.orientation = simd_quaternion(from: [0, 1, 0], to: normalize(vector))
+            lineEntity.orientation = simd_quaternion(SIMD3<Float>(0, 1, 0), normalize(vector))
             
             anchor.addChild(lineEntity)
             arView?.scene.addAnchor(anchor)

@@ -71,7 +71,7 @@ struct ScannerView: View {
         .onDisappear {
             barcodeService.stopParsing()
         }
-        .onChange(of: barcodeService.scannedCode) { _, newCode in
+        .onChange(of: barcodeService.scannedCode) { newCode in
             if let code = newCode {
                 // Play success haptic
                 let generator = UINotificationFeedbackGenerator()
