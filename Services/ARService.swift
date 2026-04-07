@@ -69,13 +69,13 @@ class ARService: NSObject, ObservableObject, ARSessionDelegate {
     }
     
     private func drawLine(from start: SIMD3<Float>, to end: SIMD3<Float>) {
-        let length = simd_distance(start, end)
-        let cylinder = MeshResource.generateCylinder(radius: 0.005, height: length)
+        let length = Float(simd_distance(start, end))
+        let cylinder = MeshResource.generateCylinder(height: length, radius: 0.005)
         let material = SimpleMaterial(color: .blue, isMetallic: false)
         lineEntity = ModelEntity(mesh: cylinder, materials: [material])
         
         if let lineEntity = lineEntity {
-            let midpoint = simd_mix(start, end, SIMD3<Float>(repeating: 0.5))
+            let midpoint = simd_mix(start, end, SIMD3<Float>(0.5, 0.5, 0.5))
             let anchor = AnchorEntity(world: midpoint)
             
             let vector = end - start
