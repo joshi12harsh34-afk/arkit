@@ -43,8 +43,7 @@ struct ARMeasureView: View {
                         Image(systemName: "ruler.fill")
                         Text("Measuring: \(currentStep)")
                     }
-                    .font(.subheadline)
-                    .fontWeight(.bold)
+                    .font(.subheadline.bold())
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "02AAB0"), Color(hex: "00CDAC")]), startPoint: .leading, endPoint: .trailing))
